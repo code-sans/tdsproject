@@ -18,8 +18,11 @@ import chardet
 #   "pandas",
 #   "matplotlib",
 #   "numpy",
+#   "scikit-learn",
+#   "httpx",
 # ]
 # ///
+
 
 def load_data(dataset_path):
     # Detect the encoding of the file
