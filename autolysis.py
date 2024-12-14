@@ -20,8 +20,10 @@ import chardet
 #   "numpy",
 #   "scikit-learn",
 #   "httpx",
+#   "chardet",
 # ]
 # ///
+
 
 
 def load_data(dataset_path):
