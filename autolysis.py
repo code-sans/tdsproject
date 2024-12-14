@@ -7,8 +7,8 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
-import requests
-
+import http.client
+import json
 import chardet
 
 # /// script
@@ -21,9 +21,9 @@ import chardet
 #   "scikit-learn",
 #   "httpx",
 #   "chardet",
+#   "http.client",
 # ]
 # ///
-
 
 
 def load_data(dataset_path):
@@ -134,23 +134,37 @@ def generate_story(dataset):
         "Authorization": f"Bearer {os.environ['AIPROXY_TOKEN']}",
         "Content-Type": "application/json"
     }
+
     data = {
         "model": "gpt-4o-mini",
         "messages": [{"role": "user", "content": prompt}]
     }
 
-    response = requests.post(
-        "https://aiproxy.sanand.workers.dev/openai/v1/chat/completions",
-        headers=headers,
-        json=data
+    # Establish a connection to the server
+    conn = http.client.HTTPSConnection("aiproxy.sanand.workers.dev")
+
+    # Send POST request with data and headers
+    conn.request(
+        "POST", 
+        "/openai/v1/chat/completions", 
+        body=json.dumps(data), 
+        headers=headers
     )
 
-    if response.status_code == 200:
-        story = response.json()['choices'][0]['message']['content']
+    # Get response from the server
+    response = conn.getresponse()
+    if response.status == 200:
+        response_data = response.read().decode("utf-8")
+        story = json.loads(response_data)['choices'][0]['message']['content']
+
+        # Write story to README.md
         with open("README.md", "w") as file:
             file.write(story)
     else:
-        print(f"Error: {response.status_code}, {response.text}")
+        print(f"Error: {response.status}, {response.read().decode('utf-8')}")
+    
+    # Close the connection
+    conn.close()
 
 def main(file_path):
     dataset = load_data(file_path)
