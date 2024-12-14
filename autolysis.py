@@ -11,6 +11,16 @@ import requests
 
 import chardet
 
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "seaborn",
+#   "pandas",
+#   "matplotlib",
+#   "numpy",
+# ]
+# ///
+
 def load_data(dataset_path):
     # Detect the encoding of the file
     with open(dataset_path, 'rb') as file:
