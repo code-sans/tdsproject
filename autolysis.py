@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.decomposition import PCA
-from sklearn.cluster import KMeans
 import http.client
 import json
 import chardet
@@ -25,37 +24,30 @@ import chardet
 # ]
 # ///
 
-
 def load_data(dataset_path):
-    # Detect the encoding of the file
+    """Load the dataset with appropriate encoding."""
     with open(dataset_path, 'rb') as file:
         result = chardet.detect(file.read())
-    encoding = result['encoding'] or 'ISO-8859-1'  # Default to ISO-8859-1 if detection fails
+    encoding = result['encoding'] or 'ISO-8859-1'
 
-    # Read the CSV file with the detected encoding
     try:
         dataset = pd.read_csv(dataset_path, encoding=encoding)
     except UnicodeDecodeError:
-        # Fallback to a safe encoding
         dataset = pd.read_csv(dataset_path, encoding='ISO-8859-1')
-    
+
     return dataset
 
 def preprocess_data(dataset):
-    """Preprocess data for generic handling."""
-    # Identify numeric and categorical columns
+    """Preprocess the dataset to handle missing values and outliers."""
     numeric_cols = dataset.select_dtypes(include=[np.number]).columns
     categorical_cols = dataset.select_dtypes(include=[object]).columns
 
-    # Impute missing numeric values
     imputer_numeric = SimpleImputer(strategy="median")
     dataset[numeric_cols] = imputer_numeric.fit_transform(dataset[numeric_cols])
 
-    # Impute missing categorical values
     imputer_categorical = SimpleImputer(strategy="most_frequent")
     dataset[categorical_cols] = imputer_categorical.fit_transform(dataset[categorical_cols])
 
-    # Handle outliers: Cap extreme values in numeric columns
     for col in numeric_cols:
         q1 = dataset[col].quantile(0.25)
         q3 = dataset[col].quantile(0.75)
@@ -64,70 +56,58 @@ def preprocess_data(dataset):
         upper_bound = q3 + 1.5 * iqr
         dataset[col] = np.clip(dataset[col], lower_bound, upper_bound)
 
-    # Encode categorical variables
-    dataset = pd.get_dummies(dataset, drop_first=True)
-
     return dataset
 
 def create_visualizations(dataset):
-    """Generate enhanced data visualizations."""
+    """Create meaningful data visualizations."""
     numeric_data = dataset.select_dtypes(include=[np.number])
-    categorical_data = dataset.select_dtypes(include=['object'])
 
-    # Correlation heatmap
-    if len(numeric_data.columns) > 1:
-        plt.figure(figsize=(10, 8))
-        sns.heatmap(numeric_data.corr(), annot=True, cmap="coolwarm", fmt=".2f")
-        plt.title("Correlation Heatmap")
-        plt.savefig("correlation_heatmap.png")
-        plt.close()
-
-    # Histograms for numeric columns
+    # Distribution of key numeric columns (e.g., dynamically detect columns with significant variance)
     for col in numeric_data.columns:
-        plt.figure(figsize=(8, 6))
-        sns.histplot(dataset[col], kde=True, bins=20, color="skyblue")
-        plt.title(f"Distribution of {col}")
-        plt.savefig(f"distribution_{col}.png")
+        if numeric_data[col].std() > 0.5:  # Focus on columns with meaningful variance
+            plt.figure(figsize=(8, 6))
+            sns.histplot(numeric_data[col], kde=True, bins=20, color="skyblue")
+            plt.title(f"Distribution of {col}")
+            plt.savefig(f"distribution_{col}.png", dpi=150)
+            plt.close()
+
+    # Enhanced Correlation Heatmap for numeric data
+    if len(numeric_data.columns) > 1:
+        corr_matrix = numeric_data.corr()
+        plt.figure(figsize=(12, 10))
+        sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap="coolwarm", 
+                    linewidths=0.5, cbar_kws={"shrink": 0.8})
+        plt.title("Full Correlation Matrix", fontsize=16)
+        plt.tight_layout()
+        plt.savefig("correlation_heatmap_full.png", dpi=150)
         plt.close()
 
-    # Top counts for categorical variables
-    for col in categorical_data.columns:
-        top_categories = dataset[col].value_counts().head(10)
-        plt.figure(figsize=(8, 6))
-        sns.barplot(x=top_categories.index, y=top_categories.values, palette="viridis")
-        plt.title(f"Top Categories in {col}")
-        plt.xticks(rotation=45)
-        plt.savefig(f"top_categories_{col}.png")
+        # Strong Correlations Heatmap
+        strong_corr = corr_matrix[(corr_matrix >= 0.5) | (corr_matrix <= -0.5)]
+        plt.figure(figsize=(10, 8))
+        sns.heatmap(strong_corr, annot=True, cmap="coolwarm", fmt=".2f")
+        plt.title("Strong Correlations Heatmap")
+        plt.savefig("strong_correlation_heatmap.png", dpi=150)
         plt.close()
 
-    # PCA visualization if numeric data has many features
-    if len(numeric_data.columns) > 2:
+    # PCA Visualization if sufficient numeric columns exist
+    if len(numeric_data.columns) > 5:
         pca = PCA(n_components=2)
         pca_result = pca.fit_transform(numeric_data)
         plt.figure(figsize=(8, 6))
-        sns.scatterplot(x=pca_result[:, 0], y=pca_result[:, 1], palette="coolwarm")
+        sns.scatterplot(x=pca_result[:, 0], y=pca_result[:, 1])
         plt.title("PCA Visualization")
-        plt.savefig("pca_visualization.png")
-        plt.close()
-
-    # KMeans clustering plot (if applicable)
-    if len(numeric_data.columns) > 2:
-        kmeans = KMeans(n_clusters=3, random_state=42)
-        clusters = kmeans.fit_predict(numeric_data)
-        plt.figure(figsize=(8, 6))
-        sns.scatterplot(x=pca_result[:, 0], y=pca_result[:, 1], hue=clusters, palette="deep")
-        plt.title("KMeans Clustering")
-        plt.savefig("kmeans_clustering.png")
+        plt.savefig("pca_visualization.png", dpi=150)
         plt.close()
 
 def generate_story(dataset):
-    """Generate narrative using GPT-4o-Mini via AI Proxy."""
+    """Generate narrative for the analysis using GPT-4o-Mini."""
     prompt = f"""
     Dataset Overview:
-    {dataset.describe().to_string()}
+    {dataset.describe(include='all').to_string()}
 
     Insights and Observations:
-    - Include trends, patterns, and recommendations.
+    - Highlight key patterns and actionable insights based on the data.
     """
 
     headers = {
@@ -140,30 +120,23 @@ def generate_story(dataset):
         "messages": [{"role": "user", "content": prompt}]
     }
 
-    # Establish a connection to the server
     conn = http.client.HTTPSConnection("aiproxy.sanand.workers.dev")
-
-    # Send POST request with data and headers
     conn.request(
-        "POST", 
-        "/openai/v1/chat/completions", 
+        "POST", "/openai/v1/chat/completions", 
         body=json.dumps(data), 
         headers=headers
     )
 
-    # Get response from the server
     response = conn.getresponse()
     if response.status == 200:
         response_data = response.read().decode("utf-8")
         story = json.loads(response_data)['choices'][0]['message']['content']
 
-        # Write story to README.md
         with open("README.md", "w") as file:
             file.write(story)
     else:
         print(f"Error: {response.status}, {response.read().decode('utf-8')}")
-    
-    # Close the connection
+
     conn.close()
 
 def main(file_path):
