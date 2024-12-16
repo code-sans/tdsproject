@@ -206,34 +206,20 @@ This chart visualizes the number of outliers detected in each column:
 ## Distribution of Data
 Below is the distribution plot of the first numerical column in the dataset:
 
-![Distribution](distribution_.png)
+![Distribution](distribution.png)
 
 ## Conclusion
 The analysis has provided insights into the dataset, including summary statistics, outlier detection, and correlations between key variables.
 The generated visualizations and statistical insights can help in understanding the patterns and relationships in the data.
 
 ## Data Story
-## Story
-**Title: The Chronicles of the Book Kingdom**
+Error generating response: 
 
-**Introduction**
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
 
-In a world nestled between the pages of countless tomes, the kingdom of literature thrived, where every book was a beacon of knowledge and adventure. This kingdom, known to its inhabitants as the Bibliopolis, was meticulously cataloged into a grand library that housed ten thousand unique volumes. Each book, with its own soul, was rated and cherished by readers who roamed the aisles, seeking tales that resonated with their hearts. However, beneath the surface of this vibrant literary landscape lay a treasure trove of data waiting to be uncovered, revealing the intricacies of reader preferences, the impact of publication years, and the undeniable influence of ratings.
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
 
-**Body**
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
 
-As the sun set over Bibliopolis, a wise librarian named Elara sat down to delve into the secrets hidden within the library's records. Her keen analytical mind set to work, unveiling the statistics that defined the kingdom's literary landscape. With an average of 5.26 million ratings across the volumes, it became clear that the people of Bibliopolis were not only readers but also passionate critics. The library's heart beat strongest in the ratings, where the top-rated books garnered an impressive 3 million accolades, a testament to their enduring appeal.
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
 
-However, Elara noticed a peculiar pattern. The data revealed that the number of books published over the years had a direct correlation with the ratings they received. While the average rating stood at a humble 4.5, the abundance of newer titles often overshadowed the classics, leading to a distinct divide. The older tomes, though rich in history and wisdom, struggled to maintain their relevance in a shifting literary landscape. This realization sparked a flame of curiosity in Elara's heart—what stories had been lost in the shadows of new releases?
-
-As she sifted through the statistics, she stumbled upon a curious anomaly—books with unusually high ratings often came from authors who had garnered a significant following. These best-selling authors, it seemed, held a secret key to capturing the readers' hearts. Their works, marked by intricate narratives and vivid character arcs, seemed to shine brighter amidst the sea of lesser-known texts. Yet, Elara also discerned a troubling reality: a staggering 1,163 books had been subjected to the harsh judgement of readers, resulting in a rating count that fell far below the average.
-
-The librarian pondered the implications of these findings. Could it be that the sheer volume of new releases diluted the attention given to hidden gems? Were readers so captivated by the appeal of popular authors that they overlooked the true depth of lesser-known narratives? With a heart full of resolve, Elara recognized her mission: to champion the forgotten stories and bring them back into the light.
-
-**Conclusion**
-
-As the moon rose high above Bibliopolis, casting a silvery glow over the library, Elara envisioned a new initiative—a festival celebrating the unsung heroes of literature. This festival would not only honor the beloved bestsellers but also spotlight the overlooked works that deserved a second chance. By leveraging the data she had uncovered, she would craft a campaign that encouraged readers to explore beyond the mainstream, to delve into the rich tapestry of stories that lay dormant in the library’s stacks.
-
-Through her efforts, Elara believed she could bridge the gap between the old and the new, fostering a community of readers who appreciated the diversity of narratives. The festival would remind the citizens of Bibliopolis that every book, regardless of its ratings or popularity, held a unique tale waiting to be discovered. 
-
-In the kingdom of literature, where every page turned was a step into a new world, Elara’s quest to illuminate the forgotten narratives would not only breathe life back into the shadows but also enrich the entire Bibliopolis. And so, the story of the data that once lay dormant transformed into a vibrant movement, echoing through the aisles of the library, inspiring readers to embark on their own literary adventures.

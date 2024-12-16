@@ -74,34 +74,20 @@ This chart visualizes the number of outliers detected in each column:
 ## Distribution of Data
 Below is the distribution plot of the first numerical column in the dataset:
 
-![Distribution](distribution_.png)
+![Distribution](distribution.png)
 
 ## Conclusion
 The analysis has provided insights into the dataset, including summary statistics, outlier detection, and correlations between key variables.
 The generated visualizations and statistical insights can help in understanding the patterns and relationships in the data.
 
 ## Data Story
-## Story
-**Title: The Tale of the Quality Quest**
+Error generating response: 
 
-**Introduction**
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
 
-In the bustling town of Dataville, where numbers danced and statistics sang, there lived a curious analyst named Elara. Renowned for her keen eye and unmatched ability to decipher the stories hidden within the data, she was often sought after for her insights. One crisp autumn morning, Elara received a peculiar dataset that promised to reveal much about the quality and repeatability of various experiences within the town. Little did she know that this data would lead her on an extraordinary journey filled with revelations about the nature of quality itself.
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
 
-**Body**
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
 
-As Elara delved into the dataset, she was greeted by a myriad of figures. The overall score, a composite measure of satisfaction among the townsfolk, averaged a modest 3.05 out of 5. This figure hinted at a community straddling the line between contentment and discontent. The quality of experiences scored slightly higher at 3.21, suggesting that while people found value in their pursuits, there was still room for improvement. However, the repeatability score was a mere 1.49, indicating that many residents were hesitant to revisit their experiences. 
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
 
-Elara’s analytical mind spun with questions. Why was repeatability so low? What factors contributed to the overall satisfaction? She noticed that 25% of the experiences scored a paltry 3 or below, while only a small fraction—just 24 instances—could be classified as outliers in quality, standing above the rest at a perfect 5. These anomalies intrigued her. What made those experiences exceptional and worth repeating? 
-
-As she examined the correlations, a clearer picture began to emerge. The overall score and quality were strongly correlated, with a coefficient of 0.83. This meant that when people rated their experiences higher, they were more likely to perceive them as quality offerings. However, the connection between quality and repeatability was weaker, at just 0.31. It seemed that even when quality was recognized, it did not guarantee that residents would choose to engage again. 
-
-Elara pondered the implications. Perhaps it wasn't just the quality of the experiences that mattered, but also the emotional resonance they left behind. She recalled stories from the townsfolk—of events that had dazzled them but were not worth repeating due to a lack of novelty or personal significance. The dataset had revealed something crucial: the essence of satisfaction lay not solely in quality but also in the unique, memorable connections forged during those experiences.
-
-**Conclusion**
-
-With newfound understanding, Elara crafted a plan to share her insights with the townspeople. She organized a town hall meeting, presenting her findings with enthusiasm and clarity. "Quality is important," she declared, "but let us not forget the magic of repeatability! We must create experiences that connect and resonate, ensuring that our townsfolk not only enjoy but also long to return."
-
-Elara’s words sparked a ripple of inspiration throughout Dataville. The townspeople began collaborating, seeking ways to enhance their offerings—not just by improving quality but by embedding stories and emotions into their experiences. They discovered that when people felt a connection, they were more likely to return, thus enriching the town’s culture and community spirit.
-
-In the end, Elara’s analytical journey transformed the landscape of Dataville. The numbers, once mere figures on a page, had come alive, illustrating the intricate relationship between quality, repeatability, and satisfaction. It was a tale of discovery, one that emphasized the importance of not just measuring experiences, but nurturing the bonds that made them truly unforgettable. And so, in the heart of Dataville, a new era of engagement began, one marked by a commitment to quality experiences and the stories they birthed.

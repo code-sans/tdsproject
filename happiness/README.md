@@ -140,34 +140,20 @@ This chart visualizes the number of outliers detected in each column:
 ## Distribution of Data
 Below is the distribution plot of the first numerical column in the dataset:
 
-![Distribution](distribution_.png)
+![Distribution](distribution.png)
 
 ## Conclusion
 The analysis has provided insights into the dataset, including summary statistics, outlier detection, and correlations between key variables.
 The generated visualizations and statistical insights can help in understanding the patterns and relationships in the data.
 
 ## Data Story
-## Story
-**Title: The Tapestry of Happiness: A Global Journey Through Life's Ladder**
+Error generating response: 
 
-**Introduction**
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
 
-In a world brimming with diversity, from the bustling streets of New York City to the serene landscapes of Bhutan, the quest for happiness intertwines with the very fabric of human existence. This journey is not merely subjective; it can be quantified, analyzed, and understood through a myriad of data points that illuminate the lives of individuals across different nations. The dataset we explore reveals an intricate tapestry woven from threads of life satisfaction, economic prosperity, social support, and personal freedom. As we delve into this analysis, we will uncover the stories behind the statistics, painting a vibrant picture of global well-being.
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
 
-**Body**
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
 
-At the heart of this exploration lies the 'Life Ladder,' a metaphorical representation of how individuals perceive their lives on a scale from 1 to 10. The mean score of 5.48 emerges as a beacon, suggesting that while many find themselves in a satisfactory place, a significant portion still yearns for improvement. It is fascinating to note the subtle yet impactful variations in life satisfaction across different years. The data reveals a steady climb from the lows of 2005 to a peak in 2023, hinting at evolving societal conditions or perhaps a growing awareness of what constitutes a fulfilling life.
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
 
-Diving deeper into the numbers, we discover that economic factors play a crucial role. The correlation between log GDP per capita and Life Ladder scores is strikingly high at 0.78, indicating that wealthier nations often enjoy higher levels of life satisfaction. However, wealth alone cannot paint the full picture. The significance of social support emerges as a powerful ally, with a correlation of 0.72 to life satisfaction. This suggests that human connections and community networks are vital to our happiness, transcending mere financial success. 
-
-Yet, not all is rosy in this global narrative. The shadows of negative affect and perceptions of corruption loom large. The dataset indicates that as negative emotions increase, life satisfaction declines, showcasing the delicate balance between our emotional states and overall happiness. Countries with high perceptions of corruption often experience a dip in life satisfaction, highlighting the detrimental effects of distrust in societal institutions. 
-
-The dataset also unveils the importance of personal freedoms and choices in shaping happiness. A correlation of 0.54 between freedom to make life choices and life satisfaction reinforces the idea that autonomy is a fundamental human desire. People thrive when they feel in control of their destinies, free to pursue their passions and aspirations without undue constraints. 
-
-As we peer into the nuances of generosity, we find a weaker correlation with life satisfaction, suggesting that while altruism is commendable, it may not be the primary driver of personal happiness. This complexity invites us to ponder the varying motivations behind acts of kindness and how they interplay with our own well-being.
-
-**Conclusion**
-
-In conclusion, the analysis of this dataset reveals a rich and multi-dimensional landscape of global happiness. While economic prosperity and social support emerge as strong pillars supporting the Life Ladder, it is the intricate dance between personal freedom, emotional health, and societal trust that crafts the ultimate narrative of well-being. 
-
-The findings serve as a poignant reminder that happiness is not a destination but a journey—a tapestry woven from the choices we make, the relationships we nurture, and the societies we build. As we collectively strive for a more fulfilling existence, let us take these lessons to heart: invest in community bonds, uphold integrity in our institutions, and cherish the freedoms that allow each individual to climb their own ladder towards happiness. In doing so, we may not only elevate ourselves but also contribute to a more joyful world for all.
